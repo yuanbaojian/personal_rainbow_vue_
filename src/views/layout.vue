@@ -14,8 +14,8 @@
           <i><img v-if="user.avatar != ''" :src="user.avatar"  style="width: 40px;height: 40px;margin-right: 5px;margin-left: 5px;border-radius: 40px"/>
               <img v-if="user.avatar == ''" src="@/assets/back.jpg"  style="width: 40px;height: 40px;margin-right: 5px;margin-left: 5px;border-radius: 40px"/>
           </i>
-        
-        </span>    
+
+        </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="center">个人中心</el-dropdown-item>
               <el-dropdown-item>设置</el-dropdown-item>
@@ -28,7 +28,8 @@
 
   <el-container>
 
-<!-- 侧边菜单 -->
+<!--      菜单也是由后台生成的-->
+<!-- 侧边菜单  -->
       <el-aside width="180px" class="home-aside">
           <div style="display: flex;justify-content: flex-start;width: 180px;text-align: left;">
             <el-menu style="background: #fff;width: 180px;" unique-opened router default-active ='/layout'>
@@ -52,7 +53,7 @@
                                 v-for="child in item.children"
                                 :index="child.path"
                                 :key="child.path">  <i :class="child.icon" style="color: #20a0ff;width: 14px;"></i>{{child.name}}
-                                
+
                   </el-menu-item>
                 </el-submenu>
               </template>
@@ -122,9 +123,9 @@ return {
           this.$router.replace({path: '/'});
         }
       }
-       
-         
-     
+
+
+
     },mounted(){
            console.log(this.$store.state.routes)
     }

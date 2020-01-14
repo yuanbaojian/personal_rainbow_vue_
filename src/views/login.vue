@@ -1,7 +1,13 @@
 <template>
+<!--
+el-form  vue中的表单
+:rules  验证规则
+:model  数据对象
+-->
   <el-form :rules="rules" class="login-container" label-position="left" :model="loginForm"
            label-width="0px" v-loading="loading">
     <h3 class="login_title">RAINBOW</h3>
+<!--    与username绑定-->
     <el-form-item prop="username">
       <el-input type="text" v-model="loginForm.username"
                 auto-complete="off" placeholder="账号"></el-input>
@@ -16,7 +22,9 @@
   </el-form>
 </template>
 <script>
+<!--  导出这个login 模块, 供其他模块使用-->
   export default{
+    //data需要使用return来导出
     data(){
       return {
         rules: {
@@ -28,10 +36,11 @@
           password: 'admin'
         },
         loading: false
-        
+
       }
     },
     methods: {
+      //登录函数
       submitClick: function () {
         this.loading = true;
         this.$postRequest('/login', {
@@ -40,27 +49,28 @@
         }).then(result=> {
           this.loading = false;
           if (result && result.data.status == 200) {
+            //使用data表示后台返回的值
             var data = result.data.data;
-            // 调用 mutations
+            // 调用 mutations, 将数据放入到localStorage
             this.$store.commit('user', data.user);
             this.$store.commit('setToken', data.token);
             this.$store.commit('setExpireTime', data.expireTime);
-            this.$router.push('/layout');   
+            //  跳转页面
+            this.$router.push('/layout');
           }else{
             this.$message({type: 'error', message: result.data.message});
           }
         });
       }
     }
+    //created函数， 初始化函数
     ,created(){
       this.$db.clear()
     }
   }
 </script>
+<!--css 样式表-->
 <style lang="less" scoped>
-
-
-
   .login-container {
     border-radius: 15px;
     background-clip: padding-box;
@@ -76,5 +86,5 @@
     text-align: center;
     color: #505458;
   }
- 
+
 </style>

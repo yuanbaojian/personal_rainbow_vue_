@@ -1,3 +1,4 @@
+
 import axios from 'axios'
 import store from '../store'
 import {Message} from 'element-ui'
@@ -5,9 +6,11 @@ import moment from 'moment'
 import db from './localStorage'
 import { MessageBox } from 'element-ui'
 import router from '../router';
+
+// 创建一个axios实例， 可以调用get, post方法
 // 统一配置 后台请求地址
 let rainbowAxios = axios.create({
-    baseURL: 'http://10.1.74.45:8088/',
+    baseURL: 'http://127.0.0.1:8088/',
     responseType: 'json'
 })
 
@@ -26,7 +29,7 @@ rainbowAxios.interceptors.request.use((config) => {
         }
       }
         )}
-    // 有 token就带上 
+    // 有 token就带上
     if (token) {
         config.headers.Authorization = store.state.token
     }
@@ -120,7 +123,7 @@ const request = {
         return rainbowAxios.delete(`${url}${_params}`)
     }
 
-   
+
 }
 
 export default request

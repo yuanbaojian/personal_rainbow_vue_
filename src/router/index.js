@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 import store from '@/store'
 import { initMenu } from '../utils/menu';
 import db from '@/utils/localStorage'
+//使用路由
 Vue.use(VueRouter)
-// 静态路由 不需要权限的
+// 静态路由 不需要权限的， 控制页面的跳转
 const routes = [
   {
     path: '/login',
@@ -17,7 +18,7 @@ const routes = [
     path: '/',
     redirect: '/layout',
     hidden: true
-  }, 
+  },
   {
     path: '/layout',
     name: '系统首页',
@@ -44,6 +45,7 @@ const whiteList = ['/login']
 
 // 路由卫士 发出请求之前拦截
 router.beforeEach((to, from, next)=> {
+  //白名单，直接过
   if (whiteList.indexOf(to.path) !== -1) {
     next()
   }

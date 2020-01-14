@@ -35,9 +35,9 @@ const mutations = {
 
 }
 
+//将store 放到vue中， 全局都能使用
 export default new Vuex.Store({
   state: state,
   mutations: mutations
- 
- 
+
 })
